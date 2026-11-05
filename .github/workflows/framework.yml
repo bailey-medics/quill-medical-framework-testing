@@ -1,0 +1,36 @@
+# Framework CI - single entry point.
+#
+# Hands every relevant event to Quill's framework pipeline: open a draft
+# pull request for a feature branch, and validate the frameworks on a pull
+# request. start_sync is false, so a merge to main does nothing more, and
+# this repository needs no secrets. Nothing here is meant for App
+# production.
+#
+# Do not rename the `pipeline` job. This repository's ruleset requires
+# status checks called "pipeline / validate" and "pipeline / check-protection",
+# made from this job's name and the job names in the called workflow, so a
+# rename leaves the ruleset waiting for a check that never reports.
+name: Framework CI
+
+on:
+  push:
+    branches:
+      - "feature/**"
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pipeline:
+    # id-token is never used here, since the sync is never started, but
+    # GitHub refuses the call unless the caller grants every permission a
+    # job in the called workflow asks for.
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    uses: bailey-medics/quillmedical/.github/workflows/framework-pipeline.yml@main
+    with:
+      start_sync: false
