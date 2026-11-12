@@ -27,7 +27,7 @@ framework:
   id: quill_test
   name: "Quill test framework"
   publisher: "Quill Medical"
-  version: 3
+  version: 4
   description: "A test framework, for Quill's own tests. Not for assessing anybody."
   specialties:
     - oncology
@@ -98,6 +98,8 @@ competencies:
     levels:
       - id: with_direct_supervision
         name: "With direct supervision"
+        retired_on: 2026-11-12
+        retired_in_version: 4
       - id: with_indirect_supervision
         name: "With indirect supervision"
       - id: independently
@@ -107,9 +109,13 @@ competencies:
         name: "Kidney"
       - id: liver
         name: "Liver"
+        retired_on: 2026-11-12
+        retired_in_version: 4
       - id: other
         name: "Other"
 
   - id: quill_test_use_the_old_system
     display_name: "Use the old records system"
     assessable: true
+    retired_on: 2026-11-12
+    retired_in_version: 4
