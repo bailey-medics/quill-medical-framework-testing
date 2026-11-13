@@ -2,11 +2,17 @@
 #
 # A FRAMEWORK MADE ONLY FOR TESTING QUILL
 #
-# Nobody is assessed against this. Quill's integration test syncs this
-# repository and checks what it stores, so this framework exists to have
-# a history: version 1 in one pull request, version 2 in the next. It
-# holds one competency with levels and scopes, and two without, so a test
-# can reach each shape.
+# Nobody is assessed against this. Quill's tests read a copy of it, and
+# its integration test syncs this repository and checks what it stores,
+# so this framework has a history: one pull request for each version.
+#
+# It is the full shape. quill_test_give_a_course has five levels in order
+# and several scopes, so a test can ask for a higher level or another
+# scope. quill_test_refer_to_a_team has levels too, and is where a level,
+# a scope and a whole competency are retired, so the retirement of each
+# is tested without touching what other tests rely on. The plain shape,
+# with no levels or scopes, is quill_2_test, in
+# quill-medical-2-framework-testing.
 #
 # Every id starts with the framework's id and an underscore, which the
 # loader checks for every framework.
@@ -21,9 +27,11 @@ framework:
   id: quill_test
   name: "Quill test framework"
   publisher: "Quill Medical"
-  version: 2
+  version: 3
   description: "A test framework, for Quill's own tests. Not for assessing anybody."
-  specialties: []
+  specialties:
+    - oncology
+    - haematology
 
 competencies:
   - id: quill_test_take_a_history
@@ -56,4 +64,52 @@ competencies:
 
   - id: quill_test_hand_over_a_patient
     display_name: "Hand over a patient to the next team"
+    assessable: true
+
+  - id: quill_test_give_a_course
+    display_name: "Give a course of treatment"
+    assessable: true
+    levels:
+      - id: observe
+        name: "Level 1: Observe a course being given"
+      - id: review
+        name: "Level 2: Review a course before it is given"
+      - id: continue
+        name: "Level 3: Continue a course already started"
+      - id: start
+        name: "Level 4: Start a course"
+      - id: adapt
+        name: "Level 5: Adapt a course for a complex patient"
+    scopes:
+      - id: breast
+        name: "Breast"
+      - id: lung
+        name: "Lung"
+      - id: bowel
+        name: "Bowel"
+      - id: skin
+        name: "Skin"
+      - id: other
+        name: "Other"
+
+  - id: quill_test_refer_to_a_team
+    display_name: "Refer a patient to another team"
+    assessable: true
+    levels:
+      - id: with_direct_supervision
+        name: "With direct supervision"
+      - id: with_indirect_supervision
+        name: "With indirect supervision"
+      - id: independently
+        name: "Independently"
+    scopes:
+      - id: kidney
+        name: "Kidney"
+      - id: liver
+        name: "Liver"
+      - id: other
+        name: "Other"
+
+  - id: quill_test_use_the_old_system
+    display_name: "Use the old records system"
     assessable: true
