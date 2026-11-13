@@ -11,15 +11,19 @@ set never to start the framework sync.
 
 ## What is here
 
-- `frameworks/` holds one file per framework. The four fixtures,
-  `clinical`, `ghnft_radiotherapy_record`, `ruh_sact_passport` and
-  `uk_sact_board_2023`, are test copies and need not match their
-  publishers' frameworks. `quill_test` is a small framework made only for
-  testing, with more than one version.
+- `frameworks/` holds one framework, `quill_test`: a framework made
+  only for testing, with levels, scopes and more than one version.
 
-Quill keeps a copy of these files in `shared/framework-fixtures/`, made
-by `just framework-fixtures-refresh`, so its unit tests run without the
-network. Its integration test reads this repository itself.
+Each framework repository holds exactly one framework. Quill's tests need
+two, so the other, `quill_2_test`, is in
+[`quill-medical-2-framework-testing`](https://github.com/bailey-medics/quill-medical-2-framework-testing).
+Two repositories also let Quill's integration test check that one
+repository cannot publish the other's framework.
+
+Quill keeps a copy of both, every version included, in
+`shared/framework-fixtures/`, made by `just framework-fixtures-refresh`,
+so its unit tests run without the network. Its integration test reads
+this repository itself.
 
 ## How a change is made
 
